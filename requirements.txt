@@ -27,5 +27,5 @@ python-dotenv
 six==1.16.0
 SQLAlchemy==2.0.21
 typing_extensions
-Werkzeug
+Werkzeug==2.3.7
 WTForms

@@ -78,3 +78,33 @@ class ContactSchema(ma.Schema):
 
 contact_schema = ContactSchema()
 contacts_schema = ContactSchema(many=True)
+
+class Car(db.Model):
+    id = db.Column(db.String, primary_key = True)
+    model = db.Column(db.String(200), nullable = False)
+    year = db.Column(db.String(5))
+    make = db.Column(db.String(200))
+    color = db.Column(db.String(200))
+    user_token = db.Column(db.String, db.ForeignKey('user.token'), nullable = False)
+
+    def __init__(self,model,year,make,color,user_token, id = ''):
+        self.id = self.set_id()
+        self.model = model
+        self.year = year
+        self.make = make
+        self.color = color
+        self.user_token = user_token
+
+
+    def __repr__(self):
+        return f'The following car has been added to the inventory: {self.model}'
+
+    def set_id(self):
+        return (secrets.token_urlsafe())
+
+class CarSchema(ma.Schema):
+    class Meta:
+        fields = ['id', 'model','year','make', 'color']
+
+car_schema = CarSchema()
+cars_schema = CarSchema(many=True)
