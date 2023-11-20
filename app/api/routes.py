@@ -70,11 +70,11 @@ def delete_contact(current_user_token, id):
 @token_required
 def create_car(current_user_token):
     try:
-        cars_data = request.json  # Assuming request.json is a list of cars
+        cars_data = request.json  
 
         for car_data in cars_data:
             model = car_data['model']
-            year = car_data['year']  # Convert year to an integer
+            year = car_data['year']  
             make = car_data['make']
             color = car_data['color']
             user_token = current_user_token.token
