@@ -70,23 +70,22 @@ def delete_contact(current_user_token, id):
 @token_required
 def create_car(current_user_token):
     try:
-        cars_data = request.json  
+        car_data = request.json  
 
-        for car_data in cars_data:
-            model = car_data['model']
-            year = car_data['year']  
-            make = car_data['make']
-            color = car_data['color']
-            user_token = current_user_token.token
+        model = car_data['model']
+        year = car_data['year']  
+        make = car_data['make']
+        color = car_data['color']
+        user_token = current_user_token.token
 
-            print(f'BIG TESTER: {current_user_token.token}')
+        print(f'BIG TESTER: {current_user_token.token}')
 
-            car = Car(model, year, make, color, user_token=user_token)
+        car = Car(model, year, make, color, user_token=user_token)
 
-            db.session.add(car)
-            db.session.commit()
+        db.session.add(car)
+        db.session.commit()
 
-        response = cars_schema.dump(Car.query.all())
+        response = car_schema.dump(Car.query.all())
         return jsonify(response)
     except Exception as e:
         print(f"Error creating car: {str(e)}")
